@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
-  def Index
+  def index
+    @posts = Post.all  # Fetch all posts to display on the homepage
   end
 end

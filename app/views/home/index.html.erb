@@ -1,0 +1,91 @@
+<div class="container">
+        <div class="sidebar">
+            <div class="logo">   
+                <h1><i class="mdi mdi-view-dashboard"></i>Dashboard</h1>
+            </div>
+            <div class="main-menu">
+                <ul>
+                    <li><i class="mdi mdi-home"></i> Home</li>
+                    <li><i class="mdi mdi-account"></i> Profile</li>
+                    <li><i class="mdi mdi-message-reply"></i>Messages</li>
+                    <li><i class="mdi mdi-clock-time-three"></i>History</li>
+                    <li><i class="mdi mdi-file"></i>Tasks</li>
+                    <li><i class="mdi mdi-account-group"></i>Communities</li>
+                </ul>
+            </div>
+            <div class="admin-menu">
+                <ul>
+                    <li><i class="mdi mdi-cog"></i>Settings</li>
+                    <li><i class="mdi mdi-help-box"></i>Support</li>
+                    <li><i class="mdi mdi-shield-check"></i>Privacy</li>
+                </ul>
+            </div>
+        </div>
+    <div class="wrapper">
+        <div class="header">
+
+            <div class="search-bar">
+                <i class="mdi mdi-magnify"></i>
+                <label for="search"></label>
+                <input type="text" id="search" name="dashboard_search" placeholder="Search"/>
+            </div>
+
+            <div class="small-user">
+                <i class="mdi mdi-bell-ring-outline"></i>
+                <% if user_signed_in?%>
+                    <div class="profile-pic"><img src = "images/donkey.jpg" alt = "user profile pic" height = "100" width = "auto"></div>  
+                    <h2 class="name">
+                        <%= current_user.username %>                    
+                    </h2>
+                <% else %>
+                    <h2 class="name">
+                        <%= link_to "Sign In", new_user_session_path %>
+                    </h2>
+                <%end%>
+            </div>
+
+            <div class="large-user">
+                <% if user_signed_in? %>
+                    <div class="profile-pic"><img src = "images/donkey.jpg" alt = "user profile pic" height = "100" width = "auto"> </div>  
+                        <div class="greeting">
+                            <p>Hi there</p>
+                            <h2 class="user-name">
+                                <%= current_user.username %> (@<%=current_user.username %>)
+                            </h2>
+                        </div>
+                <% else %>
+                    <!-- No content when user is not signed in -->
+                <% end %>
+
+            </div>
+
+            <div class="buttons">
+                <%= link_to "New Post", new_post_path, class: "button"%>
+            </div>
+        </div>
+        <div class="projects">
+        <h2 class="main-project-title">Your Posts</h2>
+
+        <% if @posts.empty? %>
+            <p>No posts yet. <%= link_to "Create one", new_post_path %>.</p>
+        <% else %>
+            <% @posts.each do |post| %>
+            <div class="card-content">
+                <h3 class="title"><%= post.title %></h3>
+                <p><%= post.body %></p>
+                <div class="icon-wrapper">
+                <i class="mdi mdi-star-plus-outline"></i>
+                <i class="mdi mdi-eye-plus-outline"></i>
+                <i class="mdi mdi-share-variant-outline"></i>
+                </div>
+            </div>
+            <% end %>
+            
+        <% end %>
+        </div>
+
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+    </div>
+
+</div>
