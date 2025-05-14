@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
-  resources :users, only: [:new, :create, :index]
-  resources :posts, only: [:new, :create, :index]
+  resources :users, only: [ :new, :create, :index, :destroy ]
+  resources :posts, only: [ :new, :create, :index ]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
